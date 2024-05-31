@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\CategoryExport;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\CategoryRequest;
 use App\Models\Category;
 use Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -31,7 +33,7 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-    
+
         $requestData = $request->all();
 
         if($request->hasFile('image')){
@@ -81,7 +83,7 @@ class CategoryController extends Controller
             $file->move('set/img/',$imageName);
             $requestData['image'] = $imageName;
         }
-        
+
         $category->update($requestData);
 
         return redirect()->route('admin.category.index')->with('updated','Update successfully');
@@ -95,5 +97,10 @@ class CategoryController extends Controller
         $category->delete();
 
         return redirect()->back()->with('deleted','Category delete successfully');
+    }
+
+    public function export()
+    {
+        return Excel::download(new CategoryExport, 'category.xlsx');
     }
 }

@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<title>RegistrationForm_v1 by Colorlib</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		
+
 		<!-- MATERIAL DESIGN ICONIC FONT -->
 		<link rel="stylesheet" href="{{asset('login/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
 
@@ -21,7 +21,7 @@
 				<div class="image-holder">
 					<img src="{{asset('login/images/registration-form-1.jpg')}}" alt="">
 				</div>
-				<form action="{{ route('login.check')}}" method="POST">
+				<form action="{{ route('login.check') }}" method="POST">
                     @csrf
 					<h3>Login Form</h3>
 					<div class="form-wrapper">
@@ -34,18 +34,18 @@
 						@error("password") <span class="invalid-feedback">{{$message}}</span>  @enderror
 						<i class="zmdi zmdi-lock"></i>
 					</div>
-					<div class="form-wrapper">
-						<div class=" g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>
-						@if ($errors->has('g-recaptcha-response'))
-							<span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
-						@endif
-					</div>
+{{--					<div class="form-wrapper">--}}
+{{--						<div class=" g-recaptcha" data-sitekey="{{ env('RECAPTCHA_SITE_KEY') }}"></div>--}}
+{{--						@if ($errors->has('g-recaptcha-response'))--}}
+{{--							<span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>--}}
+{{--						@endif--}}
+{{--					</div>--}}
 					<button type="submit" class="btn btn-primary">Enter</button>
 				</form>
 			</div>
 		</div>
 
-		<script src="https://www.google.com/recaptcha/api.js"></script>
-		
+{{--		<script src="https://www.google.com/recaptcha/api.js"></script>--}}
+
 	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>

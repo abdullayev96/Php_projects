@@ -13,4 +13,10 @@ class User extends Model implements Authenticatable
     use \Illuminate\Auth\Authenticatable;
     use HasFactory;
 
+
+    protected $fillable = [
+        'name',
+        'password'
+    ];
+
 }

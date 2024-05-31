@@ -16,10 +16,10 @@ Route::get('/',[MainController:: class, 'index'])->name('index');
 Route::get('/course/detail/{slug}',[MainController:: class, 'categoryPosts'])->name('categoryPosts');
 
 
-Route::get('/login/page',[UserController:: class, 'loginPage'])->name('login.page');
-Route::post('/login/check',[UserController:: class, 'loginCheck'])->name('login.check');
+Route::get('/login/page', [UserController:: class, 'loginPage'])->name('login.page');
+Route::post('/login/check', [UserController:: class, 'loginCheck'])->name('login.check');
 
-Route::get('/admin/dashboard',[MainController::class,'dashboard'])->name('dashboard');
+//Route::get('/admin/dashboard',[MainController::class,'dashboard'])->name('dashboard');
 
 Route::get('/logout',function(){
     Auth::logout();
@@ -30,7 +30,9 @@ Route::get('/logout',function(){
 
 Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function(){
 
-    Route::get('/admin/dashboard',[MainController::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard',[MainController::class,'dashboard'])->name('dashboard');
+
+    Route::get('category/export/', [CategoryController::class, 'export'])->name('category.export');
 
     Route::resources([
         'category' => CategoryController::class,
