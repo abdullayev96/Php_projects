@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ModulController;
@@ -21,8 +22,7 @@ Route::post('/login/check', [UserController:: class, 'loginCheck'])->name('login
 
 //Route::get('/admin/dashboard',[MainController::class,'dashboard'])->name('dashboard');
 
-Route::get('/logout',function(){
-    Auth::logout();
+Route::get('/logout',function(){Auth::logout();
 
     return redirect('/login/page');
 
@@ -33,6 +33,10 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function(){
     Route::get('/dashboard',[MainController::class,'dashboard'])->name('dashboard');
 
     Route::get('category/export/', [CategoryController::class, 'export'])->name('category.export');
+    Route::get('contact/export/', [ContactController::class, 'export'])->name('contact.export');
+
+
+
 
     Route::resources([
         'category' => CategoryController::class,

@@ -10,6 +10,7 @@
                       <div class="card">
                         <div class="card-header">
                           <h4>Bog'lanish</h4>
+                            <a href="{{ route('admin.contact.export') }}" class="btn btn-warning">Export</a>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -33,7 +34,7 @@
                                 <th>Delete</th>
                                 <th>Read</th>
                               </tr>
-                            
+
                             @foreach($contacts as $contact)
                                 <tr>
                                   <td>{{ $loop->iteration }}</td>
@@ -65,7 +66,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>

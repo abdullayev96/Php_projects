@@ -2,34 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ContactExport;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Admin\ContactRequest;
 use App\Models\Contact;
 use App\Models\Category;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $contact = Contact::all();
         return view('admin.contact.index',['contacts'=>$contact]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         // Nothing
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(ContactRequest $request)
     {
 
@@ -40,26 +37,20 @@ class ContactController extends Controller
         return back()->with('created','Information send successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Contact $contact)
     {
         return view('admin.contact.show',compact('contact'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Contact $contact)
     {
-        $categorys = Category::all();
-        return view('admin.contact.edit',compact('categorys','contact'));
+        $contact = Contact::all();
+        return view('admin.contact.edit',compact('contact','contact'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(ContactRequest $request, Contact $contact)
     {
         $contactData = $request->all();
@@ -69,13 +60,52 @@ class ContactController extends Controller
         return redirect()->route('admin.contact.index')->with('updated','Information updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Contact $contact)
     {
         $contact->delete();
 
         return back()->with('deleted','Information deleted successfully!');
     }
+
+    public function export()
+    {
+        return Excel::download(new ContactExport, 'contact.xlsx');
+    }
+
+
+//    public function create()
+//    {
+//        return view('profile');
+//    }
+//
+//    public function store(Request $request)
+//    {
+//        // Validate the request
+//        $request->validate([
+//            'f_name' => 'required|string|max:255',
+//            'l_name' => 'required|string|max:255',
+//            'phone' => 'required|string|max:20',
+//            'message' => 'required|string|max:1000',
+//        ]);
+//
+//        // Create and save the message
+//        Message::create([
+//            'f_name' => $request->f_name,
+//            'l_name' => $request->l_name,
+//            'phone' => $request->phone,
+//            'message' => $request->message,
+//        ]);
+//
+//        // Optionally, you can redirect or return a response
+//        return redirect('/profile');
+////        return response()->json(['success' => true, 'message' => 'Message saved successfully.']);
+//    }
+//
+//    public function export()
+//    {
+//        return Excel::download(new MessagesExport, 'messages.xlsx');
+//    }
+
+
 }
