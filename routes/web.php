@@ -34,6 +34,7 @@ Route::prefix('admin')->middleware(['auth'])->name('admin.')->group(function(){
 
     Route::get('category/export/', [CategoryController::class, 'export'])->name('category.export');
     Route::get('contact/export/', [ContactController::class, 'export'])->name('contact.export');
+    Route::get('course/export/', [CourseController::class, 'export'])->name('course.export');
 
 
 

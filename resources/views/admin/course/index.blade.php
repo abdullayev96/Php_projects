@@ -11,6 +11,7 @@
                         <div class="card-header">
                           <h4>Bog'lanish</h4>
                           <a href="{{ route('admin.course.create') }}" class="btn btn-success">Create</a>
+                            <a href="{{ route('admin.course.export') }}" class="btn btn-warning">Export</a>
                         </div>
                         <div class="card-body">
                           <div class="table-responsive">
@@ -36,7 +37,7 @@
                                 <th>Delete</th>
                                 <th>Read</th>
                               </tr>
-                            
+
                             @foreach($courses as $course)
                                 <tr>
                                   <td>{{ $loop->iteration }}</td>
@@ -70,7 +71,7 @@
                         </div>
                       </div>
                     </div>
-                    
+
                 </div>
             </div>
         </section>
